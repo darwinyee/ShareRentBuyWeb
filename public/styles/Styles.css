@@ -1,0 +1,79 @@
+body{
+  font-family: "Raleway", sans-serif;
+}
+
+#showcase{
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.7) 100%), url("/classifiedImg.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 600px;
+}
+
+#subhead{
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: xx-large;
+}
+
+
+#showcase div h1{
+  font-family: "Questrial", sans-serif;
+}
+
+.card:hover{
+  -webkit-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+  box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
+  transition: 0.5s;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.card-img-top{
+  width: 100%;
+  height:10vw;
+  object-fit: cover;
+}
+
+.card-img-top-edit{
+  width: 30%;
+  height:10vw;
+  object-fit: cover;
+}
+
+.disp-card{
+  margin: 2rem;
+}
+
+#mapid {
+  height: 400px;
+  width: 500px;
+}
+.img-wrap {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+}
+
+.img-wrap .close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 100;
+  background-color: transparent;
+  padding: 5px 2px 2px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: .2;
+  text-align: center;
+  font-size: 22px;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+.img-wrap:hover .close {
+  opacity: 1;
+}

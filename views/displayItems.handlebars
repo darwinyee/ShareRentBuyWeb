@@ -1,0 +1,116 @@
+
+<div class="container-fluid w-75">
+  <h3 class="mt-5 mb-3 mx-auto">
+    Search Results for {{capitalize searchName}}: {{searchResult.length}}
+  </h3>
+  {{#if searchResult}}
+    <div class="row no-gutters justify-content-start">
+      {{#each searchResult}}
+        <div class=" col-auto mb-4 ml-2">
+          <div class="card" style="width: 24rem; min-width:24rem">
+            <img src="{{attDescr}}" class="card-img-top" alt="Image Unavailable" />
+            <div class="card-body">
+              <a class="card-text stretched-link" href="/item/{{itemID}}"></a>
+              <h4 class="card-title">
+                <span>
+                  {{itemName}}
+                </span>
+              </h4>
+              <h5>
+                <span>
+                  Price:
+                  ${{distanceFixed itemPrice}}
+                </span>
+              </h5>
+              <p class="card-text mb-2">
+                <span>
+                  {{itemDescription}}
+                </span>
+              </p>
+              <h5 class="card-text">
+                {{{sellBadges sellType }}}
+              </h5>
+              <p class="text-muted">
+                <span>
+                  {{itemCity}}, 
+                  {{itemState}}
+                  {{itemZip}}
+                  ({{distanceFixed distanceFromSearch}}
+                  Mi)
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      {{else}}
+        <span>
+          No items
+        </span>
+    </div>
+  {{/if}}
+</div>
+   {{#if searchResult}}
+     <div id="mapid"></div>
+  {{/if}}
+</br>  
+</div>
+
+
+<script>
+function showLocation(position) {
+  let myLatitude = position.coords.latitude;
+  let mylongitude = position.coords.longitude;
+  {{!-- getting the data json data and cleaning escaped data --}}
+  let data = {{{json searchResult}}}
+  if (data){
+    {{!-- set up Map --}}
+    let map = L.map('mapid').setView([myLatitude, mylongitude], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+    let redMarker = L.AwesomeMarkers.icon({
+      icon: 'coffee',
+      markerColor: 'red'
+    });
+        
+    L.marker([myLatitude, mylongitude], {icon: redMarker, zIndexOffset: 250}).addTo(map)
+      .bindPopup("Your Location" + '<br>')
+      .openPopup();
+
+    
+    let flagColors = ['blue', 'green', 'purple', 'orange', 'beige', 'darkblue', 'cadetblue', 'darkpurple', 'white', 'pink', 'lightblue', 'lightgreen', 'gray', 'black', 'lightgray'];
+    
+    data.forEach(function(entry,i){
+      let name = entry.itemName
+      let address = `${entry.itemAddress}\n${entry.itemCity}, ${entry.itemState}`
+      let randomColor = flagColors[i%flagColors.length];
+      let colorMarker = L.AwesomeMarkers.icon({
+      markerColor: randomColor
+      });
+      L.marker([entry.itemLat, entry.itemLong], {icon: colorMarker, zIndexOffset: 1} ).addTo(map) 
+        .bindPopup(`${entry.itemName}<br>${address}`)     
+      });
+
+  }
+}
+
+
+function errorHandler(err) {
+  if(err.code == 1) {
+      alert("Error: Access is denied!");
+  } else if( err.code == 2) {
+      alert("Error: Position is unavailable!");
+  }
+}
+
+
+if(navigator.geolocation) {       
+    // timeout at 60000 milliseconds (60 seconds)
+    let options = {timeout:60000};
+    navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+} 
+</script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+

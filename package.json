@@ -1,0 +1,43 @@
+{
+  "name": "share-rent-buy-portal",
+  "version": "1.0.0",
+  "description": "Project: An online portal to share/rent/buy items. Search results on an item have a restriction. If the closest location to find an item is x, then the search results will contain items within x+10 miles radius from the entered location.",
+  "main": "main.js",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "devStart": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pWr1ght/Share-Rent-Buy-Portal.git"
+  },
+  "author": "Dudes in Quarantine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pWr1ght/Share-Rent-Buy-Portal/issues"
+  },
+  "homepage": "https://github.com/pWr1ght/Share-Rent-Buy-Portal#readme",
+  "dependencies": {
+    "aws-sdk": "^2.668.0",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^4.0.3",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

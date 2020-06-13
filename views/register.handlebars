@@ -1,0 +1,63 @@
+<div class="container justify-content-center shadow">
+    <div class="row p-5 mt-5">
+        <div class="col-12">
+            <div class="display-4 mb-5">Create an account
+                <div id="editUserReady" class="h6" value="1" style="color:red;display:none;">*Invalid Input(s)</div>
+            </div>
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="edit_firstname" id="edit_firstname_label">First Name</label>
+                    <input type="text" id="edit_firstname" name="fname" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_lastname" id="edit_lastname_label">Last Name</label>
+                    <input type="text" id="edit_lastname" name="lname" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_email" id="edit_email_label">Email</label>
+                    <input type="email" id="edit_email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="userphone" id="userphone_label">Phone</label>
+                    <input type="text" id="userphone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group ">
+                    <label for="edit_password" id="edit_password_label">Password</label>
+                    <div class="input-group">
+
+                        <input type="password" id="edit_password" name="password" class="form-control"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain 1 or more number, 1 uppercase, 1 
+                            lowercase letter, and 8 or more characters"
+                            placeholder="1 or more number, 1 uppercase, 1 lowercase letter, and 8 or more characters"
+                            required>
+                        <div class="input-group-append" >
+                            <span style="display: none;" class="material-icons input-group-text" id="passwordOK">done_outline</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="match_password" id="match_password_label">Retype Password</label>
+                    <div class="input-group">
+
+                        <input type="password" id="match_password" name="matchPassword" class="form-control"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain 1 or more number, 1 uppercase, 1 
+                            lowercase letter, and 8 or more characters"
+                            placeholder="1 or more number, 1 uppercase, 1 lowercase letter, and 8 or more characters"
+                            required>
+                        <div class="input-group-append" >
+                            <span style="display: none;" class="material-icons input-group-text" id="matchOK">done_outline</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button id="registerBtn" class="btn btn-outline-info btn-block">Register</button>
+                </div>
+
+            </form>
+
+        </div>
+        <a class="p-3" href="/login">Login Here</a>
+    </div>
+</div>
+<script src="scripts/register.js"></script>
+<script src="scripts/editUser.js"></script>

@@ -1,0 +1,377 @@
+<div class="container my-5">
+    <div class="h1">Welcome back, {{data.username}}!</div> 
+    <button class="badge badge-success" id="editInfo">Edit your info</button>
+</div>
+<div class="container" id="cards">
+    <div class="row" >
+        {{#if data.data}}
+        {{#each data.data}}
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    {{#if attachments}}
+                    {{#each attachments}}
+                        {{#with this}}
+                            <span class="attachdetails_{{this.ListingId}}" data-filename="{{this.AttName}}" data-id="{{this.AttachId}}" data-deleted="1" hidden></span>
+                            <img src="{{this.AttLink}}" class="card-img-top-edit img-thumbnail"  alt="/Files/image-unavailable1.png">
+                        {{/with}}
+                    {{/each}}
+                    {{else}}
+                        <img src="{{this.firstpic}}" class="card-img-top-edit img-thumbnail" alt="/Files/image-unavailable1.png">
+                    {{/if}}
+                </div>    
+                    <div class="card-body">
+                        <h5 id="name{{id}}" class="card-title text-center">{{itemName}}</h5>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h5 id="price{{id}}" class="card-subtitle mb-2 text-muted">Price: ${{itemPrice}}</h5>
+                                <h5 id="class{{id}}" class="card-subtitle my-2 text-muted">Category: {{categoryName}}</h6>
+                            </li>
+                            <li id="address{{id}}" class="list-group-item">
+                                <h5 class="card-subtitle my-2 text-muted">Location:</h5>
+                                <h6 class="card-subtitle my-2 text-muted">{{itemAddress}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{itemCity}}, {{itemState}} {{itemZip}}</h5>
+                            </li>
+                            <hr>
+                        </ul>
+
+                    </div>
+                    
+                    <div class="card-body text-center">
+                        <input hidden id="item{{id}}" value="{{id}}" type="text">
+                        <a id="edit{{id}}" name="edit{{id}}" href="#" class="card-link btn btn-outline-primary"
+                            onclick="editItem({{id}})">Edit</input>
+                            <a id="delete{{id}}" href="#" class="card-link btn btn-outline-warning"
+                                onclick="deleteItem({{id}})">Delete</a>
+                    </div>
+                
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="card text-center">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <h5 class="card-title">You do not have any items to show.</h5>
+                <p class="card-text">Post a few items for rent or sale to earn some cash!</p>
+                <a href="/addItem" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="card-footer text-muted"></div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<div class="container shadow p-5 mt-5" id="edits" hidden>
+    <div class="row">
+        <div class="display-4 mb-5">Edit Item
+            <div id="inputReady" class="h6" value="1" style="color:red;display:none;">*Invalid Input(s)</div>
+        </div>
+        
+        <form id="editForm">   
+            <div id="divInForm" class="form-row">
+            <div class="col-sm-9">
+                <label for="edit_name" id="edit_name_label">Item name</label>
+                <input type="text" class="form-control" name="edit_name" id="edit_name">
+            </div>
+            <div class="col-sm-3">
+                <label for="edit_price" id="edit_price_label">Price</label>
+                <input type="text" class="form-control" name="edit_price" id="edit_price">
+            </div>
+            <div class="col-12 mt-2">
+                <label for="edit_descr" id="edit_descr_label">Item Description</label>
+                <textarea class="form-control" name="edit_descr" id="edit_descr" rows="10"></textarea>
+            </div>
+            <div class="col-sm-4 mt-2">
+                <label for="select_buy_choice" id="select_buy_choice_label">Share/Rent/Buy?</label>
+                <select class="form-control" name="select_buy_choice" id="select_buy_choice">
+                <option value = "-1">Please Select</option>
+                <option value="Buy">Buy</option>
+                <option value="Rent">Rent</option>
+                <option value="Share">Share</option>
+                </select> 
+            </div>
+            <div class="col-sm-4 mt-2">
+                <label for="inputCat" id="inputCat_label">Category</label>
+                <select class="form-control" name="inputCat" id="inputCat">
+                </select>
+            </div>
+            <div class="col-sm-4 mt-2">
+                <label for="phone" id="phone_label">Phone Number (xxx-xxx-xxxx)</label>
+                <input type="tel" class="form-control" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+            </div>
+            <div class="col-12 mt-2">
+                <label for="inputAddress" id="inputAddress_label">Street Address</label>
+                <input type="text" class="form-control" name="inputAddress" id="inputAddress">
+            </div>
+            <div class="col-sm-5 mt-2">
+                <label for="inputCity" id="inputCity_label">City</label>
+                <input type="text" class="form-control" name="inputCity" id="inputCity">
+            </div>
+            <div class="col-sm-4 mt-2">
+                <label for="inputState" id="inputState_label">State</label>
+                <select class="form-control" name="inputState" id="inputState">
+                    <option value="-1">
+                        Please Select...
+                    </option>
+                    <option value="AK">
+                        Alaska
+                    </option>
+                    <option value="AL">
+                        Alabama
+                    </option>
+                    <option value="AR">
+                        Arkansas
+                    </option>
+                    <option value="AZ">
+                        Arizona
+                    </option>
+                    <option value="CA">
+                        California
+                    </option>
+                    <option value="CO">
+                        Colorado
+                    </option>
+                    <option value="CT">
+                        Connecticut
+                    </option>
+                    <option value="DC">
+                        District of Columbia
+                    </option>
+                    <option value="DE">
+                        Delaware
+                    </option>
+                    <option value="FL">
+                        Florida
+                    </option>
+                    <option value="GA">
+                        Georgia
+                    </option>
+                    <option value="HI">
+                        Hawaii
+                    </option>
+                    <option value="IA">
+                        Iowa
+                    </option>
+                    <option value="ID">
+                        Idaho
+                    </option>
+                    <option value="IL">
+                        Illinois
+                    </option>
+                    <option value="IN">
+                        Indiana
+                    </option>
+                    <option value="KS">
+                        Kansas
+                    </option>
+                    <option value="KY">
+                        Kentucky
+                    </option>
+                    <option value="LA">
+                        Louisiana
+                    </option>
+                    <option value="MA">
+                        Massachusetts
+                    </option>
+                    <option value="MD">
+                        Maryland
+                    </option>
+                    <option value="ME">
+                        Maine
+                    </option>
+                    <option value="MI">
+                        Michigan
+                    </option>
+                    <option value="MN">
+                        Minnesota
+                    </option>
+                    <option value="MO">
+                        Missouri
+                    </option>
+                    <option value="MS">
+                        Mississippi
+                    </option>
+                    <option value="MT">
+                        Montana
+                    </option>
+                    <option value="NC">
+                        North Carolina
+                    </option>
+                    <option value="ND">
+                        North Dakota
+                    </option>
+                    <option value="NE">
+                        Nebraska
+                    </option>
+                    <option value="NH">
+                        New Hampshire
+                    </option>
+                    <option value="NJ">
+                        New Jersey
+                    </option>
+                    <option value="NM">
+                        New Mexico
+                    </option>
+                    <option value="NV">
+                        Nevada
+                    </option>
+                    <option value="NY">
+                        New York
+                    </option>
+                    <option value="OH">
+                        Ohio
+                    </option>
+                    <option value="OK">
+                        Oklahoma
+                    </option>
+                    <option value="OR">
+                        Oregon
+                    </option>
+                    <option value="PA">
+                        Pennsylvania
+                    </option>
+                    <option value="PR">
+                        Puerto Rico
+                    </option>
+                    <option value="RI">
+                        Rhode Island
+                    </option>
+                    <option value="SC">
+                        South Carolina
+                    </option>
+                    <option value="SD">
+                        South Dakota
+                    </option>
+                    <option value="TN">
+                        Tennessee
+                    </option>
+                    <option value="TX">
+                        Texas
+                    </option>
+                    <option value="UT">
+                        Utah
+                    </option>
+                    <option value="VA">
+                        Virginia
+                    </option>
+                    <option value="VT">
+                        Vermont
+                    </option>
+                    <option value="WA">
+                        Washington
+                    </option>
+                    <option value="WI">
+                        Wisconsin
+                    </option>
+                    <option value="WV">
+                        West Virginia
+                    </option>
+                    <option value="WY">
+                        Wyoming
+                    </option>
+                </select>
+            </div>
+            <div class="col-sm-3 mt-2">
+                <label for="inputZip" id="inputZip_label">Zip Code</label>
+                <input type="text" class="form-control" name="inputZip" id="inputZip">
+            </div>
+            </div>
+        </form>
+        <div class="col-12 p-0 my-0 mt-3">
+            <div class="form-group" id="curAttached" style="display:none;">
+                <div class="h6" >Attachments (limit 3)</div>
+                <div id="attachImgs" class="row mb-3"></div>
+            </div>
+
+            <div class="form-group p-0">
+                <button class="btn btn-link p-0 m-0" id="addAttachLnk">Click here to add more images</button>
+            </div>
+                                 
+            <div class="form-group" id="newAttached" style="display:none;">
+                <label for="uploadForm" id="myFile_label">Add New Attachments (3 total attachments maximum)</label>
+                <form id="uploadForm" enctype="multipart/form-data" method="post" name="fileinfo" accept="image/*">
+                    <input id="myFile" type="file" name="aws_multiple_images" multiple />
+                    <p id="msg"></p>
+                </form>
+            </div>         
+        </div>
+        <div class="col-12 justify-content-center">
+            <div class="row justify-content-center">
+                <input hidden id="edit_item_Id" type="text">
+                <a id="save_edit" href="#" class="card-link btn btn-outline-primary"
+                    onclick="saveEdit()">Save</a>
+                <a id="cancel_it" href="#" class="card-link btn btn-outline-warning"
+                    onclick="cancelEdit()">Cancel</a>  
+            </div>                  
+        </div>        
+
+    </div>
+</div>
+
+<!-- Loading Modal -->
+        <div class="modal fade" id="LoadingModal1" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="spinner-border text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                    <span id="loadingModalStatus" class="display-5 text-success">Saving new listing...</span>
+              </div>        
+
+            </div>
+          </div>
+        </div>    
+
+<!-- Edit user info Modal -->
+<div class="modal fade" id="editUserInfo" tabindex="-1" role="dialog" aria-labelledby="editUserInfoCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="editUserInfoLongTitle">Edit Your Information</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="editUserReady" class="h6" value="1" style="color:red;display:none;">*Invalid Input(s)</div>  
+        <div class="row p-5">
+            <form id="editUser">   
+                <div class="form-row">
+                    <input type="text" id="userId" hidden>
+                    <div class="col-12 mb-2">
+                        <label for="edit_firstname" id="edit_firstname_label">First Name</label>
+                        <input type="text" class="form-control" name="edit_firstname" id="edit_firstname">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="edit_lastname" id="edit_lastname_label">Last Name</label>
+                        <input type="text" class="form-control" name="edit_lastname" id="edit_lastname">
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="edit_email" id="edit_email_label">Email</label>
+                        <input type="email" class="form-control" name="edit_email" id="edit_email" readonly>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="edit_password" id="edit_password_label">Password (leave blank if no change)</label>
+                        <input type="password" class="form-control" name="edit_password" id="edit_password">
+                    </div>
+                    <div class="col-12">
+                        <label for="userphone" id="userphone_label">Phone Number (xxx-xxx-xxxx)</label>
+                        <input type="tel" class="form-control" name="userphone" id="userphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+                    </div>
+                </div>
+            </form>    
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-outline-primary" onclick="saveUser()">Save</button>
+        <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Cancel</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/edititem.js"></script>
+<script src="/scripts/editUser.js"></script>

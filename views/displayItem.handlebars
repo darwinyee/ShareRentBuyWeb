@@ -1,0 +1,108 @@
+  <div class="container">
+    <br>
+    <div class="row">
+
+      <div class="col-lg-3">
+         <!-- area where it indicates buy or rentable, its on a fixed position -->
+        <h1 class="my-4"></h1>
+        <div class="list-group">
+          </br>
+          {{!-- <a href="#" class="btn btn-success">Buy</a> --}}
+          </br>
+          {{!-- the posters email --}}
+          <a href="mailto:{{this.userEmail}}" target="_newtab" class="btn btn-info">Contact Poster</a>
+          
+        </div>
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+        <div class="card mt-4 h-100 ">
+          <div class= "img-fluid" style="text-align:center">
+            
+            {{!-- <img src="/Files/electric-bike.jpg"> --}}
+            <img style="width:100; height: 300px; margin-top: 10px" src={{this.attDescr}}>
+          </div>
+          {{!-- <img src="Files/electric-bike.jpg"class="card-img-top img-fluid"  alt=""> --}}
+          <div class="card-body">
+            <h3 class="card-title">{{this.itemName}}</h3>
+            <h4>${{this.itemPrice}}</h4>
+            <p class="card-text">{{this.itemDescription}}</p>
+           
+          </div>
+        </div>
+        <!-- /.card -->
+
+        {{!-- <div class="card card-outline-secondary my-4">
+          <div class="card-header">
+            Provided Poster Info
+          </div>
+          <div class="card-body">
+
+             <span class="text-warning"> Rank: &#9733; &#9733; &#9733; &#9733; &#9734;</span>
+            4.0 stars
+            <br>
+            <br>
+            <div>
+              <p>Email@email.com <br>
+                Like what you see take a look at this person's other <a href="#" >items</a><p>
+              <p></p>
+            </div>
+            
+            <br>
+            <a href="#" class="btn btn-success">Review Poster</a>
+          </div>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+
+  </div> --}}
+{{!-- 
+ <div class="container">
+  <div class="row">
+     <div class="col">
+        <div class="jumbotron">
+          <div class="container">
+          <p style="text-align:center;">{{this.itemID}}</p>
+          <img src="/Files/electric-bike.jpg">
+            <p><b>Description: </b>It is a white bike which I want somebody to buy. Who wants it.</p>
+            <p><b>Price: </b>this</p>
+            <p><b>Location: </b>this location</p>
+            <p></p>
+            <hr class="my-4">
+            <p></p>
+            <p class="lead">
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-primary btn-md" href="" role="button">Contact Poster</a>
+              </div>
+              <div class="col">
+                <a class="btn btn-primary btn-md" href="" role="button">Place Request</a>
+              </div>
+            </div>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+        {{!-- <div class="card h-100">
+            <img class="card-img-top" src="..." alt="Replace with Attachement img">
+            <div class="card-body">
+              <h5 class="card-title text-truncate">{{this.Title}}</h5>
+              <p class="card-text">{{this.Descr}}</p>
+              <a class="card-text stretched-link"><small class="text-muted" id="{{this.Id}}_dist">{{this.City}}, {{this.ZipCode}}</small></a>
+              <div class="LatLong" id={{this.Id}} hidden>
+                <span id="{{this.Id}}_lat">{{this.Lat}}</span>
+                <span id="{{this.Id}}_lon">{{this.Lon}}</span>
+              </div>
+            </div>
+          </div>
+      </div> --}}
+    </div>
+</div> 

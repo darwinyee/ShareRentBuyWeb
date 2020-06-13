@@ -1,0 +1,78 @@
+<section id="showcase" class="d-flex justify-content-center align-items-center">
+  <div id="header" class="container text-center">
+    <h1 class="display-4 text-info">
+      Share, Rent, or Buy Awesome Stuff
+    </h1>
+    <p id="subhead" class="lead d-none d-md-block text-muted">
+      The Easiest Way to Find Greatness!!!
+    </p>
+    <form>
+      <div class="form-row justify-content-center">
+        <div class="col-sm-8 mb-2">
+          <input
+            class="form-control"
+            type="text"
+            id="input_search"
+            placeholder="What are you looking for?"
+          />
+        </div>
+        <div class="col-sm-2">
+          <input
+            type="button"
+            class="form-control btn btn-info"
+            id="input_search_button"
+            value="Find it!"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<!--card display of items-->
+{{#if items}}
+  <section>
+    <div class="container mt-5">
+      <h3 class="text-black text-center mb-4">
+        NEW ADDITIONS
+      </h3>
+      <div class="row justify-content-center">
+        {{#each items}}
+          <div class="col-sm-6 col-md-3 mb-4">
+            <div class="card h-100">
+              <img
+                class="card-img-top img-thumbnail"
+                src="{{this.FirstAttLink}}"
+                alt="Replace with Attachement img"
+              />
+              <div class="card-body">
+                <h5 class="card-title text-truncate">
+                  {{this.Title}}
+                </h5>
+                <p class="card-text">
+                  Price: &#36;{{this.Price}}
+                </p>
+                <a class="card-text stretched-link" href="/item/{{this.Id}}">
+                  <small class="text-muted" id="{{this.Id}}_dist">
+                    {{this.City}}
+                    ,
+                    {{this.ZipCode}}
+                  </small>
+                </a>
+                <div class="LatLong" id={{this.Id}} hidden>
+                  <span id="{{this.Id}}_lat">
+                    {{this.Lat}}
+                  </span>
+                  <span id="{{this.Id}}_lon">
+                    {{this.Lon}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+{{/if}}
+
+<script src="scripts/home.js"></script>

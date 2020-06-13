@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users ( 
+    userID INT(11) NOT NULL AUTO_INCREMENT, 
+    dateJoined DATE NOT NULL, 
+    firstName VARCHAR(255) NOT NULL, 
+    lastName VARCHAR(255) NOT NULL, 
+    userPassword VARCHAR(255) NOT NULL, 
+    userEmail VARCHAR(255) NOT NULL, 
+    userPhone VARCHAR(15),
+    userRole VARCHAR(15), 
+    PRIMARY KEY (userID) 
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS Categories;
+CREATE TABLE Categories (
+    categoryId INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryName VARCHAR(255) NOT NULL
+    
+)ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS Items;
+CREATE TABLE Items (
+    `itemID` INT(11) NOT NULL AUTO_INCREMENT,
+    `userID` INT(11) NOT NULL,
+    `catID` INT (11) NOT NULL,
+    `itemName` VARCHAR(255) NOT NULL,
+    `itemDescription` VARCHAR(255) NOT NULL,
+    `itemPrice` DECIMAL(9,2) NOT NULL,
+    `itemPhone` VARCHAR(20) NOT NULL,
+    `itemAddress` VARCHAR(255) NOT NULL,
+    `itemCity` VARCHAR(50) NOT NULL,
+    `itemState` VARCHAR(10),
+    `itemZip` INT(11),
+    `itemLat` DECIMAL(10, 8) NOT NULL, 
+    `itemlong` DECIMAL(11, 8) NOT NULL,
+    PRIMARY KEY (`itemID`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `Items`
+ADD CONSTRAINT `fk_items_user_id` FOREIGN KEY (`userID` ) REFERENCES `Users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `Items`
+ADD CONSTRAINT `fk_categories_cat_id` FOREIGN KEY (`catID`)  REFERENCES `Categories` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+DROP TABLE IF EXISTS `Attachments`;
+CREATE TABLE `Attachments` (
+    `attachmentID` INT (11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `itemID` INT (11) NOT NULL,
+    `attName` VARCHAR(255) NOT NULL,
+    `attDescr` VARCHAR(255),
+    CONSTRAINT `fk_items_item_id` FOREIGN KEY (`itemID`)  REFERENCES `Items` (`itemID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TRIGGER tr_user_dtjoined
+BEFORE INSERT
+ON Users FOR EACH ROW
+ SET NEW.dateJoined = DATE.NOW()
